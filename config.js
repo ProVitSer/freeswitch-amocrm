@@ -5,7 +5,7 @@ config.pg = {};
 config.fs = {};
 
 //Path to call records. Symbolic link ln -s /var/lib/freeswitch/recordings/you-ip-address-or-domain/archive/ /var/www/fusionpbx/rec
-config.recordPathLink = 'https://you-ip-address-or-domain/archive/';
+config.recordPathLink = 'https://you-ip-address-or-domain/rec/archive/';
 config.recordPath = '/var/www/fusionpbx/rec/archive/';
 
 //Data for connection to FreeSWITCH
