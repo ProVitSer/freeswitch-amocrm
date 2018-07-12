@@ -91,7 +91,6 @@ app.get("/amocrm.js", (req, res) => {
 });
 
 function getRecording(recording, callback) {
-	console.log(recording);
 	client.query(`select start_stamp,record_name FROM v_xml_cdr WHERE uuid = '${recording}'`, (err, result) => {
 		if (err) {
 			logger.debug('getRecording function request failed: ', err)
