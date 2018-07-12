@@ -20,7 +20,7 @@ All the connection settings to the database and FreeSWITCH are made in config.js
 
 ```javascript
 
-config.recordPathLink = 'https://you-ip-address-or-domain/archive/';
+config.recordPathLink = 'https://you-ip-address-or-domain/rec/archive/';
 config.recordPath = '/var/www/fusionpbx/rec/archive/';
 
 config.esl.ip = '127.0.0.1';
