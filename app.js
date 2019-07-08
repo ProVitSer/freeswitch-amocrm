@@ -91,7 +91,7 @@ app.get("/amocrm.js", (req, res) => {
 });
 
 function getRecording(recording, callback) {
-	client.query(`select start_stamp,record_name FROM v_xml_cdr WHERE uuid = '${recording}'`, (err, result) => {
+	client.query(`select start_stamp,record_name FROM xml_cdr_uuid WHERE uuid = '${recording}'`, (err, result) => {
 		if (err) {
 			logger.debug('getRecording function request failed: ', err)
 		};
@@ -120,7 +120,7 @@ function fsCall(toNumber, fromExten, callback) {
 }
 
 function getCDR(fromDate, callback) {
-	client.query(`select  to_char(((start_stamp) - interval '3 hour'), 'YYYY-MM-DD HH24:MI:SS') as  calldate, caller_id_number as src, destination_number as dst, billsec,uuid as uniqueid, record_name as recordingfile, json-> 'variables' ->> 'endpoint_disposition' as endpoint from v_xml_cdr WHERE leg like 'a' and billsec>=10 and start_stamp > '${fromDate[0]}' AND start_stamp < '${fromDate[1]}'`, (err, result) => {
+	client.query(`select  to_char(((start_stamp) - interval '3 hour'), 'YYYY-MM-DD HH24:MI:SS') as  calldate, caller_id_number as src, destination_number as dst, billsec,xml_cdr_uuid as uniqueid, record_name as recordingfile, json-> 'variables' ->> 'endpoint_disposition' as endpoint from v_xml_cdr WHERE leg like 'a' and billsec>=10 and start_stamp > '${fromDate[0]}' AND start_stamp < '${fromDate[1]}'`, (err, result) => {
 		if (err) {
 			logger.debug('getCDR function request failed: ', err);
 		};
@@ -144,7 +144,7 @@ function getStatus(data, callback) {
 					"channelstatedesc": data.rows[1].callstate,
 					"calleridnum": data.rows[1].callee_num,
 					"calleridname": data.rows[1].callee_name,
-					"connectedlinenum": data.rows[1].initial_cid_num,
+					"connectedlinenum": data.rows[1].initial_cid_num.slice(1),
 					"connectedlinename": data.rows[1].initial_cid_name,
 					"accountcode": "",
 					"context": data.rows[1].context,
