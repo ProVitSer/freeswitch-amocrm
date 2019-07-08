@@ -40,4 +40,16 @@ config.pg.password = 'admin123033';
 config.pg.port = 5432;
 ```
 
+## Nginx
+
+Add 
+
+```shell
+location /amocrm.js {
+    proxy_pass http://$host:3000$request_uri;
+}
+```
+into /etc/nginx/sites-enabled/fusionpbx in the section describes https and reload nginx
+
+
 An extended configuration instruction can be found at the [freeswitch-amocrm](https://voipnotes.ru/integratsiya-freeswitch-amocrm/).
